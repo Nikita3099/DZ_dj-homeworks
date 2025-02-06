@@ -1,18 +1,28 @@
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, reverse
 import os
 import datetime
 
-def home_view(request):
-    """Главная страница со списком доступных маршрутов"""
-    return render(request, 'home.html', {'routes': ['/', 'current_time/', 'workdir/']})
 
-def current_time_view(request):
-    """Вывод текущего времени"""
-    now = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-    return HttpResponse(f"Текущее время: {now}")
+def home_view(request):
+    template_name = 'app/home.html'
+    pages = {
+        'Главная страница': reverse('home'),
+        'Показать текущее время': reverse('time'),
+        'Показать содержимое рабочей директории': reverse('dir_list')
+    }
+
+    context = {
+        'pages': pages
+    }
+    return render(request, template_name, context)
+
+def time_view(request):
+    current_time = datetime.datetime.now().strftime('%H:%M:%S')
+    msg = f'Текущее время: {current_time}'
+    return HttpResponse(msg)
 
 def workdir_view(request):
-    """Вывод списка файлов в рабочей директории"""
     files = os.listdir('.')
     return HttpResponse('<br>'.join(files))
+    raise NotImplemented
