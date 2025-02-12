@@ -57,6 +57,9 @@ DATABASES = {
         'NAME': 'netology_models_list',
         'HOST': '127.0.0.1',
         'PORT': '5432',
+        'USER': 'postgres',
+        'PASSWORD': '56405',
+        'OPTIONS': {'options': '-c client_encoding=UTF8'}
     }
 }
 
