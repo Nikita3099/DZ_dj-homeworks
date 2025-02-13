@@ -40,6 +40,26 @@ Content-Type: application/json
 
 ###
 
-# получение информации по датчику
-GET {{baseUrl}}/sensors/1/
+# получение информации по датчику 
+GET {{baseUrl}}/sensors/1/detail/
 Content-Type: application/json
+
+
+
+POST http://127.0.0.1:8000/api/measurements/
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary
+
+------WebKitFormBoundary
+Content-Disposition: form-data; name="sensor"
+
+1
+------WebKitFormBoundary
+Content-Disposition: form-data; name="temperature"
+
+22.5
+------WebKitFormBoundary
+Content-Disposition: form-data; name="image"; filename="photo.jpg"
+Content-Type: image/jpeg
+
+< ./photo.jpg
+------WebKitFormBoundary--
